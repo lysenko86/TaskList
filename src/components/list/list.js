@@ -13,7 +13,7 @@ const List = ({ items }) => {
     });
 
     return (
-        <ul className="app-list list-group mt-2 mb-2">
+        <ul className="list-group mt-2 mb-2 app-list">
             { elements }
         </ul>
     );

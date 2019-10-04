@@ -13,12 +13,12 @@ const ListItem = ({ text, priority=0 }) => {
             { text }
             <button
                 type="button"
-                className="app-list-item-action-btn btn btn-sm btn-outline-danger float-right"
+                className="btn btn-sm btn-outline-danger float-right app-list-item-action-btn"
                 onClick={ removeItem }
             ><i className="far fa-trash-alt" /></button>
             <button
                 type="button"
-                className="app-list-item-action-btn btn btn-sm btn-outline-success float-right"
+                className="btn btn-sm btn-outline-success float-right app-list-item-action-btn"
             ><i className="fas fa-exclamation" /></button>
         </div>
     );
