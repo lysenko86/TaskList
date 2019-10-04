@@ -2,12 +2,19 @@ import React from 'react';
 import ListItem from '../list-item';
 import './list.css';
 
-const List = () => {
+const List = ({ items }) => {
+    const elements = items.map(item => {
+        const { id, ...itemProps } = item;
+        return (
+            <li key={ id } className="list-group-item">
+                <ListItem { ...itemProps } />
+            </li>
+        );
+    });
+
     return (
-        <ul className="list-group">
-            <ListItem text="first task 111" />
-            <ListItem text="second task 222" />
-            <ListItem text="third task 333" />
+        <ul className="app-list list-group mt-2 mb-2">
+            { elements }
         </ul>
     );
 }

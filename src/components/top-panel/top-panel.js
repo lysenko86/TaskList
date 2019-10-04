@@ -3,7 +3,7 @@ import './top-panel.css';
 
 const TopPanel = () => {
     return (
-        <nav className="navbar sticky-top navbar-dark bg-dark">
+        <nav className="app-top-panel navbar sticky-top navbar-dark bg-dark">
             <a className="navbar-brand" href="#">TaskManager</a>
             <ul className="navbar-nav">
                 <li className="nav-item">

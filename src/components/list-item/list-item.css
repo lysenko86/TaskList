@@ -1,0 +1,24 @@
+.app-list-item {
+
+}
+
+.app-list-item-action-btn {
+    width: 31px;
+    margin: 0px 3px;
+}
+
+.app-list-item-priority-0 {
+    color: #464646;
+}
+
+.app-list-item-priority-1 {
+    color: #4073d6;
+}
+
+.app-list-item-priority-2 {
+    color: #f49c18;
+}
+
+.app-list-item-priority-3 {
+    color: #de4c4a;
+}
