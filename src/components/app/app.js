@@ -21,7 +21,7 @@ const App = () => {
                         <LeftPanel />
                     </div>
                     <div className="col-9">
-                        <List items={items} />
+                        <List items={ items } />
                     </div>
                 </div>
             </div>
