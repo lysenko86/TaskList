@@ -4,11 +4,11 @@ import './list.css';
 
 const List = () => {
     return (
-        <div className="app">
-            <ListItem text="first task 1" />
-            <ListItem text="second task" />
-            <ListItem text="third task" />
-        </div>
+        <ul className="list-group">
+            <ListItem text="first task 111" />
+            <ListItem text="second task 222" />
+            <ListItem text="third task 333" />
+        </ul>
     );
 }
 
