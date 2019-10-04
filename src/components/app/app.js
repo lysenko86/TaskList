@@ -17,10 +17,10 @@ const App = () => {
             <TopPanel />
             <div className="container">
                 <div className="row no-gutters">
-                    <div className="col-3">
+                    <div className="col-auto">
                         <LeftPanel />
                     </div>
-                    <div className="col-9">
+                    <div className="col">
                         <List items={ items } />
                     </div>
                 </div>
