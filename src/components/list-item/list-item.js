@@ -10,17 +10,15 @@ export default class ListItem extends Component {
     };
 
     incPriority = () => {
-        this.setState({
-            priority: this.state.priority === 3 ? 0 : this.state.priority + 1
+        this.setState(({ priority }) => {
+            return {
+                priority: priority === 3 ? 0 : priority + 1
+            }
         });
     };
 
-    removeItem = () => {
-        console.log(`Remove item "${this.props.text}"`);
-    };
-
     render () {
-        const { text } = this.props;
+        const { text, onDeleted } = this.props;
         const itemClassNames = `app-list-item app-list-item-priority-${this.state.priority}`;
 
         return (
@@ -29,7 +27,7 @@ export default class ListItem extends Component {
                 <button
                     type="button"
                     className="btn btn-sm btn-outline-danger float-right app-list-item-action-btn"
-                    onClick={ this.removeItem }
+                    onClick={ onDeleted }
                 ><i className="far fa-trash-alt" /></button>
                 <button
                     type="button"
