@@ -42,7 +42,10 @@ export default class App extends Component {
             const idx = items.findIndex((el) => el.id === id);
             const item = items[idx];
             const priority = item.priority === 3 ? 0 : item.priority + 1;
-            const newItem = Object.assign({}, item, { priority });
+            const newItem = {
+                ...item,
+                priority
+            };
             const newArray = [
                 ...items.slice(0, idx),
                 newItem,
