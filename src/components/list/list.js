@@ -2,12 +2,15 @@ import React from 'react';
 import ListItem from '../list-item';
 import './list.css';
 
-const List = ({ items, onDeleted }) => {
+const List = ({ items, onDeleted, onIncPriority }) => {
     const elements = items.map(item => {
         const { id, ...itemProps } = item;
         return (
             <li key={ id } className="list-group-item">
-                <ListItem { ...itemProps } onDeleted={ () => onDeleted(id) }/>
+                <ListItem
+                    { ...itemProps }
+                    onDeleted={ () => onDeleted(id) }
+                    onIncPriority={ () => onIncPriority(id) } />
             </li>
         );
     });
