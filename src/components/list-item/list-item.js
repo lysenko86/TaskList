@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './list-item.css';
 
 const ListItem = ({ text, priority, onDeleted, onIncPriority }) => {
