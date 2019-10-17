@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import TopPanel from '../top-panel';
-import LeftPanel from '../left-panel';
+import DateFilter from '../date-filter';
+import Search from '../search';
 import List from '../list';
 import ListItemAdd from '../list-item-add';
 import './app.css';
 
 export default class App extends Component {
-    constructor () {
-        super();
-        this.state = {
-            items: [
-                { text: 'Wake Up', priority: 0, id: 1 },
-                { text: 'Drink Coffee', priority: 2, id: 2 },
-                { text: 'Make Awesome App', priority: 2, id: 3 },
-                { text: 'Have a lunch', priority: 3, id: 4 }
-            ]
-        };
+    state = {
+        items: [
+            { text: 'Wake Up', priority: 0, id: 1 },
+            { text: 'Drink Coffee', priority: 2, id: 2 },
+            { text: 'Make Awesome App', priority: 2, id: 3 },
+            { text: 'Have a lunch', priority: 3, id: 4 }
+        ],
+        searchValue: ''
     }
 
     deleteItem = (id) => {
@@ -55,18 +54,36 @@ export default class App extends Component {
         });
     }
 
+    search (items, str) {
+        if (str.length === 0) {
+            return items;
+        }
+
+        return items.filter((el) =>
+            el.text.toLowerCase().indexOf(str.toLowerCase()) > -1);
+    }
+
+    onFilterChange = (searchValue) => {
+        this.setState({ searchValue });
+    }
+
     render () {
+        const { items, searchValue } = this.state;
+        const visibleItems = this.search(items, searchValue);
         return (
             <div className="app">
                 <TopPanel />
                 <div className="container">
                     <div className="row no-gutters">
                         <div className="col-auto">
-                            <LeftPanel />
+                            <div className="mt-2 mb-2 mr-2 p-2 app-left-panel">
+                                <Search onFilterChange={ this.onFilterChange } />
+                                <DateFilter />
+                            </div>
                         </div>
                         <div className="col">
                             <List
-                                items={ this.state.items }
+                                items={ visibleItems }
                                 onDeleted={ this.deleteItem }
                                 onIncPriority={ this.incPriority } />
                             <ListItemAdd onAdded= { this.addItem } />

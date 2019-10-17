@@ -1,3 +1,7 @@
 body, .app {
     background-color: #eee;
 }
+
+.app-left-panel {
+    background-color: #fff;
+}

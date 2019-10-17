@@ -8,7 +8,7 @@ export default class ListItemAdd extends Component {
 
     onTextChange = (e) => {
         this.setState({
-            text: e.target.value.toUpperCase()
+            text: e.target.value
         });
     }
 
