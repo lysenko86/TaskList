@@ -9,7 +9,7 @@ export default class Search extends Component {
     onChange = (e) => {
         const searchValue = e.target.value;
         this.setState({ searchValue });
-        this.props.onFilterChange(searchValue);
+        this.props.onSearchChange(searchValue);
     }
 
     render () {

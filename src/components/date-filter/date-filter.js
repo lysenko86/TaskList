@@ -2,57 +2,27 @@ import React, { Component } from 'react';
 import './date-filter.css';
 
 export default class DateFilter extends Component {
-    constructor () {
-        super();
-        this.state = {
-            dateFilter: 'all'
-        };
-    }
-
-    setDateFilterAll = () => {
-        this.setState({
-            dateFilter: 'all'
-        });
-    }
-
-    setDateFilterToday = () => {
-        this.setState({
-            dateFilter: 'today'
-        });
-    }
-
-    setDateFilterTomorrow = () => {
-        this.setState({
-            dateFilter: 'tomorrow'
-        });
-    }
-
-    setDateFilterWeek = () => {
-        this.setState({
-            dateFilter: 'week'
-        });
-    }
+    buttons = [
+        { name: 'all', title: 'Всі задачі' },
+        { name: 'today', title: 'Сьогодні' },
+        { name: 'tomorrow', title: 'Завтра' },
+        { name: 'week', title: 'Тиждень' }
+    ]
 
     render () {
-        const { dateFilter } = this.state;
+        const { filterValue, onFilterChange } = this.props;
+        const buttons = this.buttons.map(({ name, title }) => {
+            const isActive = name === filterValue;
+            const clazz = isActive ? 'btn-primary' : 'btn-outline-secondary';
+            return <button
+                type="button"
+                key={ name }
+                className={ `btn btn-sm ${clazz}` }
+                onClick={ () => onFilterChange(name) }>{ title }</button>
+        });
         return (
             <div className="btn-group-vertical mt-2">
-                <button
-                    type="button"
-                    className={ `btn btn-sm ${dateFilter === 'all' ? 'btn-primary' : 'btn-outline-secondary'}` }
-                    onClick={ this.setDateFilterAll }>Всі задачі</button>
-                <button
-                    type="button"
-                    className={ `btn btn-sm ${dateFilter === 'today' ? 'btn-primary' : 'btn-outline-secondary'}` }
-                    onClick={ this.setDateFilterToday }>Сьогодні</button>
-                <button
-                    type="button"
-                    className={ `btn btn-sm ${dateFilter === 'tomorrow' ? 'btn-primary' : 'btn-outline-secondary'}` }
-                    onClick={ this.setDateFilterTomorrow }>Завтра</button>
-                <button
-                    type="button"
-                    className={ `btn btn-sm ${dateFilter === 'week' ? 'btn-primary' : 'btn-outline-secondary'}` }
-                    onClick={ this.setDateFilterWeek }>Тиждень</button>
+                { buttons }
             </div>
         );
     }

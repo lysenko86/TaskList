@@ -9,12 +9,13 @@ import './app.css';
 export default class App extends Component {
     state = {
         items: [
-            { text: 'Wake Up', priority: 0, id: 1 },
-            { text: 'Drink Coffee', priority: 2, id: 2 },
-            { text: 'Make Awesome App', priority: 2, id: 3 },
-            { text: 'Have a lunch', priority: 3, id: 4 }
+            { text: 'Wake Up', priority: 0, id: 1, date: 1571388296044 },
+            { text: 'Drink Coffee', priority: 2, id: 2, date: 1571474696044 },
+            { text: 'Make Awesome App', priority: 2, id: 3, date: 1571561096044 },
+            { text: 'Have a lunch', priority: 3, id: 4, date: 1571388296044 }
         ],
-        searchValue: ''
+        searchValue: '',
+        filterValue: 'all' // all, today, tomorrow, week
     }
 
     deleteItem = (id) => {
@@ -30,7 +31,8 @@ export default class App extends Component {
 
     addItem = (text) => {
         this.setState(({ items }) => {
-            const newItem = { text: text, priority: 0, id: items.length + 1 };
+            const date = new Date().valueOf();
+            const newItem = { text, priority: 0, id: items.length + 1, date };
             const newArray = [...items, newItem];
             return { items: newArray }
         });
@@ -54,22 +56,47 @@ export default class App extends Component {
         });
     }
 
-    search (items, str) {
-        if (str.length === 0) {
+    onSearchChange = (searchValue) => {
+        this.setState({ searchValue });
+    }
+
+    onFilterChange = (filterValue) => {
+        this.setState({ filterValue });
+    }
+
+    search (items, searchValue) {
+        if (searchValue.length === 0) {
             return items;
         }
 
         return items.filter((el) =>
-            el.text.toLowerCase().indexOf(str.toLowerCase()) > -1);
+            el.text.toLowerCase().indexOf(searchValue.toLowerCase()) > -1);
     }
 
-    onFilterChange = (searchValue) => {
-        this.setState({ searchValue });
+    filter (items, filterValue) {
+        const dateOneDay = 24*60*60*1000;
+        const dateNow = new Date();
+        const dateToday = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()).valueOf();
+        const dateTomorrow = dateToday + dateOneDay;
+        const dateAfterTomorrow = dateToday + dateOneDay * 2;
+        const dateWeek = dateToday + dateOneDay * 7;
+        switch (filterValue) {
+            case 'all':
+                return items;
+            case 'today':
+                return items.filter(item => item.date >= dateToday && item.date < dateTomorrow);
+            case 'tomorrow':
+                return items.filter(item => item.date >= dateTomorrow && item.date < dateAfterTomorrow);
+            case 'week':
+                return items.filter(item => item.date >= dateToday && item.date < dateWeek);
+            default:
+                return items;
+        }
     }
 
     render () {
-        const { items, searchValue } = this.state;
-        const visibleItems = this.search(items, searchValue);
+        const { items, searchValue, filterValue } = this.state;
+        const visibleItems = this.filter(this.search(items, searchValue), filterValue);
         return (
             <div className="app">
                 <TopPanel />
@@ -77,8 +104,10 @@ export default class App extends Component {
                     <div className="row no-gutters">
                         <div className="col-auto">
                             <div className="mt-2 mb-2 mr-2 p-2 app-left-panel">
-                                <Search onFilterChange={ this.onFilterChange } />
-                                <DateFilter />
+                                <Search onSearchChange={ this.onSearchChange } />
+                                <DateFilter
+                                    filterValue={ filterValue }
+                                    onFilterChange={ this.onFilterChange } />
                             </div>
                         </div>
                         <div className="col">
