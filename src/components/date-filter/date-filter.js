@@ -14,11 +14,13 @@ export default class DateFilter extends Component {
         const buttons = this.buttons.map(({ name, title }) => {
             const isActive = name === filterValue;
             const clazz = isActive ? 'btn-primary' : 'btn-outline-secondary';
-            return <button
-                type="button"
-                key={ name }
-                className={ `btn btn-sm ${clazz}` }
-                onClick={ () => onFilterChange(name) }>{ title }</button>
+            return (
+                <button
+                    type="button"
+                    key={ name }
+                    className={ `btn btn-sm ${clazz}` }
+                    onClick={ () => onFilterChange(name) }>{ title }</button>
+            )
         });
         return (
             <div className="btn-group-vertical mt-2">
