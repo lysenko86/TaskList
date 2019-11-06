@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/taskmanager-db', {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', require('./router'));
 
 app.listen(3003, () => {
