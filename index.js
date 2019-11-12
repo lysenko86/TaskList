@@ -14,5 +14,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', require('./router'));
 
 app.listen(3003, () => {
-    console.log('Server was started...');
+    console.log('Server was started on port 3003 ...');
 });
